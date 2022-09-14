@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <button type="button" onclick="sendMsg('hello');">hello</button>
+    <button type="button" onclick="sendMsg('study');">study</button>
+    <button type="button" onclick="sendMsg('bye');">bye</button>
+    <h5 id="content"></h5>
+    <script>
+      var socket = io.connect();
+      // 효율적인 방법
+      function sendMsg(msg) {
+        socket.emit("send", msg);
+      }
+
+      
+      // 같은 동작을 각각의 함수로 따로 만든 경우 -> 비효율적
+      // function hello(){
+      //     socket.emit("hello", "hello");
+      // }
+      // function study(){
+      //     socket.emit("study", "study");
+      // }
+      // function bye(){
+      //     socket.emit("bye", "bye");
+      // }
+      socket.on("response", function (data) {
+        var tag = document.getElementById("content");
+        tag.textContent = data;
+      });
+    </script>
+  </body>
+</html>

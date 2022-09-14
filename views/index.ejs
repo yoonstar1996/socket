@@ -5,11 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <title>socket</title>
   </head>
   <body>
+    <h2>Hello World</h2>
+    <button type="button" class="hello" onclick="hello()">hello</button>
+    <button type="button" class="study" onclick="study()">study</button>
+    <button type="button" class="bye" onclick="bye()">bye</button>
+    <div id="content"></div>
     <script>
       var socket = io.connect();
+
+      // var hellobtn = document.querySelector(".hello");
+      // hellobtn.addEventListener("click", function(){
+      //   $(this).add("hello")
+      // })
+
+      function hello() {
+        // $(this).add("hello");
+        socket.emit("hello", "hello");
+        // socket.on("hello2", (msg) => {
+        //   $("div").text(msg);
+        // });
+      }
+      function study() {
+        // $(this).add("study");
+        socket.emit("study", "study");
+        // socket.on("study2", (msg) => {
+        //   $("div").text(msg);
+        // });
+      }
+      function bye() {
+        // $(this).add("bye");
+        socket.emit("bye", "bye");
+        // socket.on("bye2", (msg) => {
+        //   $("div").text(msg);
+        // });
+      }
+
+      socket.on("response", (data)=>{
+        var tag = document.getElementById("content");
+        tag.innerText=data;
+      })
+      // socket.emit("이벤트명", "전송하고자 하는 데이터");
+
+      // socket.emit("welcome", "(클라이언트) 반가워");
+      // socket.on("welcome from server", (data) => {
+      //   console.log(data.name, ",", data.msg);
+      // });
     </script>
   </body>
 </html>

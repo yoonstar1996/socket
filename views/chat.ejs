@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <title>chat</title>
+    <style>
+      .background {
+        width: 200px;
+        height: 200px;
+        overflow-y:auto;
+        background-color: rgb(15, 214, 228);
+      }
+
+      .msgalignr {
+        text-align: right !important;
+        margin: 6px;
+      }
+      .msgalignl {
+        text-align: left !important;
+        margin: 6px;
+      }
+
+      .sendmsg {
+        background-color: yellow;
+        border-radius: 8%;
+      }
+      .readmsg {
+        background-color: white;
+        border-radius: 8%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background">
+        <div class="msgalignr"><span class="sendmsg">하이</span></div>
+        <div class="msgalignl"><span class="readmsg">하이2</span></div>
+    </div>
+    <br>
+    <input type="text" name="chat" />
+    <button type="button" onclick="chat()">전송</button>
+
+    <script>
+      var socket = io.connect();
+      var background = $(".background");
+
+      function chat() {
+        var chatval = document.querySelector("input").value;
+        socket.emit("send", chatval);
+        $("input").val("");
+      }
+      socket.on("sendMsg", (msg) => {
+        $(background).append(`<div class="msgalignr"><span class="sendmsg">${msg}</span></div>`);
+        console.log(msg);
+      });
+    </script>
+  </body>
+</html>
