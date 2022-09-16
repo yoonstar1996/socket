@@ -1,0 +1,136 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 500px;
+}
+.user_list {
+  margin: 8px;
+  min-width: 9rem;
+  border: 1px solid black;
+  font-size: 0.9rem;
+}
+.list_user {
+  padding: 0;
+  text-align: center;
+  margin: 3px;
+}
+.space{
+  margin: 3px;
+}
+.chatting {
+  margin: 8px;
+  background-color: rgb(122, 193, 222);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-list::-webkit-scrollbar {
+  width: 5px;
+}
+.chat-list::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: #ffc600;
+}
+.chat-list {
+  background-color: skyblue;
+  width: 450px;
+  height: 400px;
+  overflow-y: auto;
+  flex: 12;
+  padding: 0 0 0 0;
+}
+
+.chat-list > div > div {
+  display: inline-block;
+  margin: 5px 5px;
+  border-radius: 5px;
+}
+.my-chat {
+  text-align: right;
+  margin: 0 5px 0 15px;
+}
+.my-chat > div {
+  background-color: #ffeb33;
+}
+.other-chat {
+  text-align: left;
+  margin: 0 15px 0 5px;
+}
+.other-chat > div {
+  background-color: white;
+
+}
+/* .dm {
+  text-align: left;
+} */
+.dm > div {
+  background-color: pink;
+}
+#dm {
+  width: 25%;
+  height: 30px;
+  margin: 0 0 0 0;
+  padding: 0 0 0 5px;
+}
+.nickname,
+.out {
+  color: gray;
+  font-size: 0.8rem;
+  margin: 6px 10px;
+  text-align: center;
+}
+.enter {
+  background-color: transparent;
+  border: none;
+  font-size: 0.9rem;
+  text-align: center;
+  justify-content: center;
+}
+#msg {
+  height: 100%;
+  overflow-y: scroll;
+  width: 63%;
+  padding: 0 4px 0 6px;
+  font-size: 0.9rem;
+  /* border: none; */
+}
+#button {
+  width: 12%;
+  height: 30px;
+  border: none;
+  background-color: #ffeb33;
+  margin: 10px 0 0 0;
+}
+.topinput {
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+.nickbox {
+  font-size: 0.9rem;
+  padding-left: 8px;
+  background-color: white;
+  text-align: center;
+  justify-content: center;
+}
+.nickbox:focus {
+  font-size: 0.9rem;
+  padding-left: 8px;
+}
+.textinput {
+  margin: auto;
+  display: flex;
+  width: 450px;
+  background-color: white;
+  border: 1 solid black;
+  flex: 2;
+}
+.enter {
+  color: black;
+  padding-left: 9px;
+}

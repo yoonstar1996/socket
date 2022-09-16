@@ -13,15 +13,15 @@
   <body>
     <div class="wrapper">
       <div class="user_list">
-        <div class="space" style="text-align: center">현재 채팅방 인원</div>
-        <ul class="list_user space">
+        <div style="text-align: center">현재 채팅방 인원</div>
+        <ul class="list_user">
           <!-- <li>윤경민</li> -->
         </ul>
       </div>
 
       <div class="chatting">
         <div class="topinput">
-          <input type="text" name="name" class="nickbox" placeholder="ID를 입력 후 Enter" onfocus="clearF(this)" />
+          <input type="text" name="name" class="nickbox" placeholder="ID를 입력 후 Enter" onfocus="clearF(this)" /> (으)로
           <button type="button" onclick="enteR()" class="enter">입장하기</button>
         </div>
         <div class="chat-list">
@@ -54,7 +54,7 @@
       });
 
       socket.on("userlist", (nickname) => {
-        $(".list_user").append(`<div class="space">${nickname}</div>`);
+        $(".list_user").append(`<div>${nickname}</div>`);
       });
 
       socket.on("entrySuccess", () => {
@@ -63,6 +63,7 @@
         } else if (nickname.length >= 10) {
           alert("10자리 아래로 입력하세요.");
         } else if (nickname.length < 10) {
+
           socketEvent();
           $(".nickbox, .enter").attr("disabled", true);
           $("#msg").focus();
@@ -73,24 +74,23 @@
         socket.on("notice", (nickname) => {
           $(".chat-list").append(`<div class="nickname">${nickname}님이 입장했습니다.</div>`);
         });
-
         socket.on("send", (data) => {
           var className = "";
           var name = "";
           if (data.name == nickname) {
             className = "my-chat";
-          } else {
+          } 
+          else {
             className = "other-chat";
             name = `${data.name} : `;
           }
 
-          if (data.dm != "all") {
+          if( data.dm != "all" ) {
             className += " dm";
           }
 
           $(".chat-list").append(`<div class="${className}"><div>${name}${data.msg}</div></div>`);
         });
-
         socket.on("clientUpdate", (client) => {
           var option = `<option value="all">전체에게</option>`;
           for (var key in client) {
@@ -98,6 +98,7 @@
               option += `<option value="${key}">${client[key]}</option>`;
             }
           }
+
           $("#dm").html(option);
         });
       }
@@ -116,7 +117,6 @@
           msg: msg,
           dm: dm,
         };
-        // console.log($(".chat-list").last("div"));
         // console.log(data.name);
         if (nickname == undefined) {
           alert("입장 후 전송을 눌러주세요.");
@@ -125,10 +125,12 @@
         } else {
           socket.emit("sendMsg", data);
         }
-        
+        // console.log(msg);
+
         $("#msg").val("");
-        $(".chat-list").scrollTop(300);
-        console.log($(".chat-list").scrollTop());
+        // $(".chat-list").scrollTop($(".chat-list").prop('scrollHeight')-34);
+        $(".chat-list").scrollTop($(document).height() + 1000);
+        // console.log($(".chat-list").scrollTop($(document).height()));
       }
 
       document.querySelector(".nickbox").addEventListener("keydown", ({ key }) => {
