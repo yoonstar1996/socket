@@ -4,9 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+    <script
+      src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+      integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" type="text/css" href="/static/style.css" />
     <title>socket-chat</title>
   </head>
@@ -21,8 +34,16 @@
 
       <div class="chatting">
         <div class="topinput">
-          <input type="text" name="name" class="nickbox" placeholder="ID를 입력 후 Enter" onfocus="clearF(this)" />
-          <button type="button" onclick="enteR()" class="enter">입장하기</button>
+          <input
+            type="text"
+            name="name"
+            class="nickbox"
+            placeholder="ID를 입력 후 Enter"
+            onfocus="clearF(this)"
+          />
+          <button type="button" onclick="enteR()" class="enter">
+            입장하기
+          </button>
         </div>
         <div class="chat-list">
           <!-- <div class="dm"><div>안녕</div></div> -->
@@ -71,7 +92,9 @@
 
       function socketEvent() {
         socket.on("notice", (nickname) => {
-          $(".chat-list").append(`<div class="nickname">${nickname}님이 입장했습니다.</div>`);
+          $(".chat-list").append(
+            `<div class="nickname">${nickname}님이 입장했습니다.</div>`
+          );
         });
 
         socket.on("send", (data) => {
@@ -87,8 +110,9 @@
           if (data.dm != "all") {
             className += " dm";
           }
-커밋
-          $(".chat-list").append(`<div class="${className}"><div>${name}${data.msg}</div></div>`);
+          $(".chat-list").append(
+            `<div class="${className}"><div>${name}${data.msg}</div></div>`
+          );
         });
 
         socket.on("clientUpdate", (client) => {
@@ -125,17 +149,19 @@
         } else {
           socket.emit("sendMsg", data);
         }
-        
+
         $("#msg").val("");
         $(".chat-list").scrollTop(300);
         console.log($(".chat-list").scrollTop());
       }
 
-      document.querySelector(".nickbox").addEventListener("keydown", ({ key }) => {
-        if (key == "Enter") {
-          enteR();
-        }
-      });
+      document
+        .querySelector(".nickbox")
+        .addEventListener("keydown", ({ key }) => {
+          if (key == "Enter") {
+            enteR();
+          }
+        });
       document.querySelector("#msg").addEventListener("keydown", ({ key }) => {
         if (key == "Enter") {
           sendMsg();
@@ -144,7 +170,9 @@
 
       var outname = $(".nickbox").val();
       socket.on("out", (data) => {
-        $(".chat-list").append(`<div class="out">${data}님이 퇴장했습니다</div>`);
+        $(".chat-list").append(
+          `<div class="out">${data}님이 퇴장했습니다</div>`
+        );
       });
     </script>
   </body>
