@@ -1,3 +1,3 @@
 # socket
 
-socket 채팅 만들기 실습
+socket.io를 활용한 미니 프로젝트
